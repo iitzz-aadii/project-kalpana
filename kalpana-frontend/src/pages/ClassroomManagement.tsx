@@ -70,15 +70,7 @@ const ClassroomManagement: React.FC = () => {
         </div>
         <div style={{ marginBottom: '10px' }}>
           <label>Capacity:</label><br />
-          <input
-            type="number"
-            value={capacity}
-            onChange={(e) => {
-              const value = e.target.value;
-              setCapacity(value === '' ? '' : Number(value));
-            }}
-            style={{ width: '100%', padding: '8px' }}
-          />
+          <input type="number" value={capacity} onChange={(e) => setCapacity(Number(e.target.value))} style={{ width: '100%', padding: '8px' }}/>
         </div>
         <div style={{ marginBottom: '10px' }}>
           <label>Type (e.g., Lecture Hall, Lab):</label><br />
