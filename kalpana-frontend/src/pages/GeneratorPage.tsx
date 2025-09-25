@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 
-// Define a type for a single row in our timetable
 interface TimetableEntry {
   day: string;
   time: string;
@@ -22,7 +21,6 @@ const GeneratorPage: React.FC = () => {
     setTimetable([]);
 
     try {
-      // This is the API call to our backend
       const response = await fetch('http://localhost:3001/generate');
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -38,41 +36,50 @@ const GeneratorPage: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1000px', margin: 'auto' }}>
-      <h1>Timetable Generator</h1>
-      <p>Click the button to run the AI and generate an optimized timetable based on the pre-set data.</p>
+    // Main container with padding, max-width, and centered
+    <div className="p-4 md:p-8 max-w-7xl mx-auto text-white">
+      <h1 className="text-4xl font-bold mb-2">Timetable Generator</h1>
+      <p className="text-gray-400 mb-6">Click the button to run the AI and generate an optimized timetable.</p>
       
-      <button onClick={handleGenerate} disabled={isLoading} style={{ padding: '10px 20px', fontSize: '1.2em', marginBottom: '20px', cursor: 'pointer' }}>
+      {/* Styled button with hover effect and transition */}
+      <button 
+        onClick={handleGenerate} 
+        disabled={isLoading} 
+        className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 transition-colors duration-200 mb-8 disabled:bg-gray-500"
+      >
         {isLoading ? 'Generating...' : '✨ Generate Timetable'}
       </button>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="text-red-500 bg-red-100 p-3 rounded-lg">{error}</p>}
 
       {timetable.length > 0 && (
         <div>
-          <h2>Generated Timetable</h2>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-            <thead>
-              <tr style={{ background: '#333' }}>
-                <th style={{ border: '1px solid #555', padding: '10px' }}>Day</th>
-                <th style={{ border: '1px solid #555', padding: '10px' }}>Time</th>
-                <th style={{ border: '1px solid #555', padding: '10px' }}>Subject</th>
-                <th style={{ border: '1px solid #555', padding: '10px' }}>Faculty</th>
-                <th style={{ border: '1px solid #555', padding: '10px' }}>Classroom</th>
-              </tr>
-            </thead>
-            <tbody>
-              {timetable.map((entry, index) => (
-                <tr key={index} style={{ background: index % 2 === 0 ? '#222' : '#282828' }}>
-                  <td style={{ border: '1px solid #555', padding: '10px' }}>{entry.day}</td>
-                  <td style={{ border: '1px solid #555', padding: '10px' }}>{entry.time}</td>
-                  <td style={{ border: '1px solid #555', padding: '10px' }}>{entry.subject}</td>
-                  <td style={{ border: '1px solid #555', padding: '10px' }}>{entry.faculty}</td>
-                  <td style={{ border: '1px solid #555', padding: '10px' }}>{entry.classroom}</td>
+          <h2 className="text-2xl font-bold mb-4">Generated Timetable</h2>
+          {/* Table with a container for overflow on small screens */}
+          <div className="overflow-x-auto rounded-lg shadow-lg">
+            <table className="w-full text-left">
+              <thead className="bg-gray-700">
+                <tr>
+                  <th className="p-4 font-semibold">Day</th>
+                  <th className="p-4 font-semibold">Time</th>
+                  <th className="p-4 font-semibold">Subject</th>
+                  <th className="p-4 font-semibold">Faculty</th>
+                  <th className="p-4 font-semibold">Classroom</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {timetable.map((entry, index) => (
+                  <tr key={index} className="border-t border-gray-700 bg-gray-800 hover:bg-gray-700">
+                    <td className="p-4">{entry.day}</td>
+                    <td className="p-4">{entry.time}</td>
+                    <td className="p-4">{entry.subject}</td>
+                    <td className="p-4">{entry.faculty}</td>
+                    <td className="p-4">{entry.classroom}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
