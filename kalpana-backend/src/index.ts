@@ -3,15 +3,29 @@ import express from 'express';
 import cors from 'cors';
 import { generateTimetable } from './engine';
 import { TimetableInput } from './types';
+import collegeRoutes from './routes/collegeRoutes';
 
 const app = express();
 const port = 3001;
 
-// Enable CORS for all routes
+// Middleware
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Routes
+app.use('/api/colleges', collegeRoutes);
+
+// Legacy routes for backward compatibility
 app.get('/', (req, res) => {
-  res.send('Hello from Kalpana Backend!');
+  res.json({
+    message: 'Kalpana Nationwide Timetable Platform API',
+    version: '2.0.0',
+    endpoints: {
+      colleges: '/api/colleges',
+      legacy: '/generate'
+    }
+  });
 });
 
 app.get('/generate', (req, res) => {
@@ -47,7 +61,6 @@ app.get('/generate', (req, res) => {
       { id: 'T10', day: 'Friday', startTime: '10:00', endTime: '11:00' },
     ],
   };
-  // (Keep your full dummy data here as it was before)
   
   try {
     const timetable = generateTimetable(testInput);
@@ -75,6 +88,25 @@ app.get('/generate', (req, res) => {
   }
 });
 
+// Error handling middleware
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({
+    success: false,
+    error: 'Something went wrong!'
+  });
+});
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    error: 'Endpoint not found'
+  });
+});
+
 app.listen(port, () => {
-  console.log(`Backend server is running at http://localhost:${port}`);
+  console.log(`🚀 Kalpana Nationwide Platform API running at http://localhost:${port}`);
+  console.log(`📚 College endpoints: http://localhost:${port}/api/colleges`);
+  console.log(`🔧 Legacy endpoint: http://localhost:${port}/generate`);
 });

@@ -1,0 +1,730 @@
+{
+  "students": [
+    {
+      "id": "NIT001",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "CS101"]
+    },
+    {
+      "id": "NIT002",
+      "name": "Priya Patel",
+      "email": "priya.patel@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "CS101"]
+    },
+    {
+      "id": "NIT003",
+      "name": "Rahul Kumar",
+      "email": "rahul.kumar@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 1,
+      "section": "B",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "CS101"]
+    },
+    {
+      "id": "NIT004",
+      "name": "Sneha Singh",
+      "email": "sneha.singh@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 1,
+      "section": "B",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "CS101"]
+    },
+    {
+      "id": "NIT005",
+      "name": "Vikram Reddy",
+      "email": "vikram.reddy@nitsri.ac.in",
+      "department": "Electronics & Communication Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "EC101"]
+    },
+    {
+      "id": "NIT006",
+      "name": "Ananya Gupta",
+      "email": "ananya.gupta@nitsri.ac.in",
+      "department": "Electronics & Communication Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "EC101"]
+    },
+    {
+      "id": "NIT007",
+      "name": "Arjun Mehta",
+      "email": "arjun.mehta@nitsri.ac.in",
+      "department": "Mechanical Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "ME101"]
+    },
+    {
+      "id": "NIT008",
+      "name": "Kavya Joshi",
+      "email": "kavya.joshi@nitsri.ac.in",
+      "department": "Civil Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "CE101"]
+    },
+    {
+      "id": "NIT009",
+      "name": "Rohan Agarwal",
+      "email": "rohan.agarwal@nitsri.ac.in",
+      "department": "Electrical Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "EE101"]
+    },
+    {
+      "id": "NIT010",
+      "name": "Isha Verma",
+      "email": "isha.verma@nitsri.ac.in",
+      "department": "Chemical Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CHEM101", "ENG101", "CH101"]
+    },
+    {
+      "id": "NIT011",
+      "name": "Aditya Nair",
+      "email": "aditya.nair@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 2,
+      "section": "A",
+      "subjects": ["MATH201", "CS201", "CS202", "CS203", "CS204"]
+    },
+    {
+      "id": "NIT012",
+      "name": "Divya Iyer",
+      "email": "divya.iyer@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 2,
+      "section": "A",
+      "subjects": ["MATH201", "CS201", "CS202", "CS203", "CS204"]
+    },
+    {
+      "id": "NIT013",
+      "name": "Karthik Rao",
+      "email": "karthik.rao@nitsri.ac.in",
+      "department": "Electronics & Communication Engineering",
+      "year": 2,
+      "section": "A",
+      "subjects": ["MATH201", "EC201", "EC202", "EC203", "EC204"]
+    },
+    {
+      "id": "NIT014",
+      "name": "Meera Krishnan",
+      "email": "meera.krishnan@nitsri.ac.in",
+      "department": "Mechanical Engineering",
+      "year": 2,
+      "section": "A",
+      "subjects": ["MATH201", "ME201", "ME202", "ME203", "ME204"]
+    },
+    {
+      "id": "NIT015",
+      "name": "Suresh Kumar",
+      "email": "suresh.kumar@nitsri.ac.in",
+      "department": "Civil Engineering",
+      "year": 2,
+      "section": "A",
+      "subjects": ["MATH201", "CE201", "CE202", "CE203", "CE204"]
+    }
+  ],
+  "faculty": [
+    {
+      "id": "NITFAC001",
+      "name": "Dr. Rajesh Kumar",
+      "email": "rajesh.kumar@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "subjects": ["Data Structures", "Algorithms", "Database Management"],
+      "maxHoursPerWeek": 20,
+      "preferredTimeSlots": ["09:00-10:00", "10:00-11:00", "11:00-12:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC002",
+      "name": "Dr. Priya Sharma",
+      "email": "priya.sharma@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "subjects": ["Programming", "Software Engineering", "Web Development"],
+      "maxHoursPerWeek": 18,
+      "preferredTimeSlots": ["09:00-10:00", "14:00-15:00", "15:00-16:00"],
+      "unavailableTimeSlots": ["12:00-13:00"]
+    },
+    {
+      "id": "NITFAC003",
+      "name": "Dr. Amit Patel",
+      "email": "amit.patel@nitsri.ac.in",
+      "department": "Electronics & Communication Engineering",
+      "subjects": [
+        "Digital Electronics",
+        "Communication Systems",
+        "Signal Processing"
+      ],
+      "maxHoursPerWeek": 22,
+      "preferredTimeSlots": ["10:00-11:00", "11:00-12:00", "15:00-16:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC004",
+      "name": "Dr. Sunita Reddy",
+      "email": "sunita.reddy@nitsri.ac.in",
+      "department": "Mechanical Engineering",
+      "subjects": ["Thermodynamics", "Fluid Mechanics", "Machine Design"],
+      "maxHoursPerWeek": 20,
+      "preferredTimeSlots": ["09:00-10:00", "10:00-11:00", "14:00-15:00"],
+      "unavailableTimeSlots": ["16:00-17:00"]
+    },
+    {
+      "id": "NITFAC005",
+      "name": "Dr. Vikram Singh",
+      "email": "vikram.singh@nitsri.ac.in",
+      "department": "Civil Engineering",
+      "subjects": ["Structural Analysis", "Concrete Technology", "Surveying"],
+      "maxHoursPerWeek": 19,
+      "preferredTimeSlots": ["09:00-10:00", "11:00-12:00", "15:00-16:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC006",
+      "name": "Dr. Anjali Gupta",
+      "email": "anjali.gupta@nitsri.ac.in",
+      "department": "Electrical Engineering",
+      "subjects": ["Power Systems", "Control Systems", "Electrical Machines"],
+      "maxHoursPerWeek": 21,
+      "preferredTimeSlots": ["10:00-11:00", "14:00-15:00", "15:00-16:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC007",
+      "name": "Dr. Ravi Kumar",
+      "email": "ravi.kumar@nitsri.ac.in",
+      "department": "Chemical Engineering",
+      "subjects": ["Chemical Process", "Heat Transfer", "Mass Transfer"],
+      "maxHoursPerWeek": 20,
+      "preferredTimeSlots": ["09:00-10:00", "11:00-12:00", "16:00-17:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC008",
+      "name": "Dr. Meera Joshi",
+      "email": "meera.joshi@nitsri.ac.in",
+      "department": "Mathematics",
+      "subjects": ["Mathematics-I", "Mathematics-II", "Discrete Mathematics"],
+      "maxHoursPerWeek": 25,
+      "preferredTimeSlots": [
+        "09:00-10:00",
+        "10:00-11:00",
+        "11:00-12:00",
+        "14:00-15:00"
+      ],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC009",
+      "name": "Dr. Suresh Verma",
+      "email": "suresh.verma@nitsri.ac.in",
+      "department": "Physics",
+      "subjects": ["Physics-I", "Physics-II", "Modern Physics"],
+      "maxHoursPerWeek": 23,
+      "preferredTimeSlots": [
+        "09:00-10:00",
+        "10:00-11:00",
+        "15:00-16:00",
+        "16:00-17:00"
+      ],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC010",
+      "name": "Dr. Kavya Nair",
+      "email": "kavya.nair@nitsri.ac.in",
+      "department": "Chemistry",
+      "subjects": ["Chemistry-I", "Chemistry-II", "Organic Chemistry"],
+      "maxHoursPerWeek": 22,
+      "preferredTimeSlots": [
+        "09:00-10:00",
+        "11:00-12:00",
+        "14:00-15:00",
+        "15:00-16:00"
+      ],
+      "unavailableTimeSlots": []
+    }
+  ],
+  "classrooms": [
+    {
+      "id": "NITROOM001",
+      "name": "Main Lecture Hall 1",
+      "capacity": 120,
+      "type": "lecture",
+      "equipment": [
+        "Projector",
+        "Whiteboard",
+        "Sound System",
+        "Air Conditioning"
+      ],
+      "location": "Main Building"
+    },
+    {
+      "id": "NITROOM002",
+      "name": "Main Lecture Hall 2",
+      "capacity": 100,
+      "type": "lecture",
+      "equipment": ["Projector", "Whiteboard", "Sound System"],
+      "location": "Main Building"
+    },
+    {
+      "id": "NITROOM003",
+      "name": "Computer Lab 1",
+      "capacity": 40,
+      "type": "computer",
+      "equipment": ["Computers", "Projector", "Network", "Air Conditioning"],
+      "location": "Computer Center"
+    },
+    {
+      "id": "NITROOM004",
+      "name": "Computer Lab 2",
+      "capacity": 35,
+      "type": "computer",
+      "equipment": ["Computers", "Projector", "Network"],
+      "location": "Computer Center"
+    },
+    {
+      "id": "NITROOM005",
+      "name": "Electronics Lab",
+      "capacity": 30,
+      "type": "lab",
+      "equipment": [
+        "Oscilloscopes",
+        "Multimeters",
+        "Breadboards",
+        "Power Supplies"
+      ],
+      "location": "Engineering Block"
+    },
+    {
+      "id": "NITROOM006",
+      "name": "Mechanical Workshop",
+      "capacity": 25,
+      "type": "lab",
+      "equipment": ["Lathe Machines", "Drilling Machines", "Safety Equipment"],
+      "location": "Workshop Block"
+    },
+    {
+      "id": "NITROOM007",
+      "name": "Chemistry Lab",
+      "capacity": 30,
+      "type": "lab",
+      "equipment": [
+        "Bunsen Burners",
+        "Test Tubes",
+        "Safety Gear",
+        "Fume Hoods"
+      ],
+      "location": "Science Block"
+    },
+    {
+      "id": "NITROOM008",
+      "name": "Physics Lab",
+      "capacity": 25,
+      "type": "lab",
+      "equipment": ["Optical Benches", "Electronic Kits", "Measurement Tools"],
+      "location": "Science Block"
+    },
+    {
+      "id": "NITROOM009",
+      "name": "Seminar Hall",
+      "capacity": 60,
+      "type": "seminar",
+      "equipment": [
+        "Projector",
+        "Whiteboard",
+        "Sound System",
+        "Air Conditioning"
+      ],
+      "location": "Main Building"
+    },
+    {
+      "id": "NITROOM010",
+      "name": "Tutorial Room 1",
+      "capacity": 30,
+      "type": "lecture",
+      "equipment": ["Whiteboard", "Projector"],
+      "location": "Main Building"
+    },
+    {
+      "id": "NITROOM011",
+      "name": "Tutorial Room 2",
+      "capacity": 25,
+      "type": "lecture",
+      "equipment": ["Whiteboard", "Projector"],
+      "location": "Main Building"
+    },
+    {
+      "id": "NITROOM012",
+      "name": "Civil Engineering Lab",
+      "capacity": 20,
+      "type": "lab",
+      "equipment": ["Surveying Equipment", "Concrete Testing", "Soil Testing"],
+      "location": "Engineering Block"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "MATH101",
+      "name": "Mathematics-I",
+      "code": "MATH101",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Mathematics",
+      "prerequisites": []
+    },
+    {
+      "id": "MATH201",
+      "name": "Mathematics-II",
+      "code": "MATH201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Mathematics",
+      "prerequisites": ["MATH101"]
+    },
+    {
+      "id": "PHYS101",
+      "name": "Physics-I",
+      "code": "PHYS101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Physics",
+      "prerequisites": []
+    },
+    {
+      "id": "CHEM101",
+      "name": "Chemistry-I",
+      "code": "CHEM101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Chemistry",
+      "prerequisites": []
+    },
+    {
+      "id": "ENG101",
+      "name": "Engineering Drawing",
+      "code": "ENG101",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "All Departments",
+      "prerequisites": []
+    },
+    {
+      "id": "CS101",
+      "name": "Programming Fundamentals",
+      "code": "CS101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Computer Science & Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "CS201",
+      "name": "Data Structures",
+      "code": "CS201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Computer Science & Engineering",
+      "prerequisites": ["CS101"]
+    },
+    {
+      "id": "CS202",
+      "name": "Programming Lab",
+      "code": "CS202",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "Computer Science & Engineering",
+      "prerequisites": ["CS101"]
+    },
+    {
+      "id": "CS203",
+      "name": "Algorithms",
+      "code": "CS203",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Computer Science & Engineering",
+      "prerequisites": ["CS201"]
+    },
+    {
+      "id": "CS204",
+      "name": "Database Management",
+      "code": "CS204",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Computer Science & Engineering",
+      "prerequisites": ["CS201"]
+    },
+    {
+      "id": "EC101",
+      "name": "Basic Electronics",
+      "code": "EC101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Electronics & Communication Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "EC201",
+      "name": "Digital Electronics",
+      "code": "EC201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Electronics & Communication Engineering",
+      "prerequisites": ["EC101"]
+    },
+    {
+      "id": "EC202",
+      "name": "Communication Systems",
+      "code": "EC202",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Electronics & Communication Engineering",
+      "prerequisites": ["EC201"]
+    },
+    {
+      "id": "EC203",
+      "name": "Electronics Lab",
+      "code": "EC203",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "Electronics & Communication Engineering",
+      "prerequisites": ["EC201"]
+    },
+    {
+      "id": "EC204",
+      "name": "Signal Processing",
+      "code": "EC204",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Electronics & Communication Engineering",
+      "prerequisites": ["EC202"]
+    },
+    {
+      "id": "ME101",
+      "name": "Engineering Mechanics",
+      "code": "ME101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Mechanical Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "ME201",
+      "name": "Thermodynamics",
+      "code": "ME201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Mechanical Engineering",
+      "prerequisites": ["ME101"]
+    },
+    {
+      "id": "ME202",
+      "name": "Fluid Mechanics",
+      "code": "ME202",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Mechanical Engineering",
+      "prerequisites": ["ME201"]
+    },
+    {
+      "id": "ME203",
+      "name": "Machine Design",
+      "code": "ME203",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Mechanical Engineering",
+      "prerequisites": ["ME202"]
+    },
+    {
+      "id": "ME204",
+      "name": "Mechanical Workshop",
+      "code": "ME204",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "Mechanical Engineering",
+      "prerequisites": ["ME201"]
+    },
+    {
+      "id": "CE101",
+      "name": "Engineering Geology",
+      "code": "CE101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Civil Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "CE201",
+      "name": "Structural Analysis",
+      "code": "CE201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Civil Engineering",
+      "prerequisites": ["CE101"]
+    },
+    {
+      "id": "CE202",
+      "name": "Concrete Technology",
+      "code": "CE202",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Civil Engineering",
+      "prerequisites": ["CE201"]
+    },
+    {
+      "id": "CE203",
+      "name": "Surveying",
+      "code": "CE203",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Civil Engineering",
+      "prerequisites": ["CE101"]
+    },
+    {
+      "id": "CE204",
+      "name": "Civil Engineering Lab",
+      "code": "CE204",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "Civil Engineering",
+      "prerequisites": ["CE201"]
+    },
+    {
+      "id": "EE101",
+      "name": "Basic Electrical Engineering",
+      "code": "EE101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Electrical Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "EE201",
+      "name": "Power Systems",
+      "code": "EE201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Electrical Engineering",
+      "prerequisites": ["EE101"]
+    },
+    {
+      "id": "EE202",
+      "name": "Control Systems",
+      "code": "EE202",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Electrical Engineering",
+      "prerequisites": ["EE201"]
+    },
+    {
+      "id": "EE203",
+      "name": "Electrical Machines",
+      "code": "EE203",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Electrical Engineering",
+      "prerequisites": ["EE201"]
+    },
+    {
+      "id": "EE204",
+      "name": "Electrical Lab",
+      "code": "EE204",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "Electrical Engineering",
+      "prerequisites": ["EE201"]
+    },
+    {
+      "id": "CH101",
+      "name": "Chemical Process Principles",
+      "code": "CH101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Chemical Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "CH201",
+      "name": "Chemical Process",
+      "code": "CH201",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Chemical Engineering",
+      "prerequisites": ["CH101"]
+    },
+    {
+      "id": "CH202",
+      "name": "Heat Transfer",
+      "code": "CH202",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Chemical Engineering",
+      "prerequisites": ["CH201"]
+    },
+    {
+      "id": "CH203",
+      "name": "Mass Transfer",
+      "code": "CH203",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Chemical Engineering",
+      "prerequisites": ["CH202"]
+    },
+    {
+      "id": "CH204",
+      "name": "Chemical Engineering Lab",
+      "code": "CH204",
+      "credits": 2,
+      "hoursPerWeek": 2,
+      "type": "practical",
+      "department": "Chemical Engineering",
+      "prerequisites": ["CH201"]
+    }
+  ]
+}

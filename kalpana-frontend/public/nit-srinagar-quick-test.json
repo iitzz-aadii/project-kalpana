@@ -1,0 +1,186 @@
+{
+  "students": [
+    {
+      "id": "NIT001",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CS101"]
+    },
+    {
+      "id": "NIT002",
+      "name": "Priya Patel",
+      "email": "priya.patel@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "CS101"]
+    },
+    {
+      "id": "NIT003",
+      "name": "Rahul Kumar",
+      "email": "rahul.kumar@nitsri.ac.in",
+      "department": "Electronics & Communication Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "EC101"]
+    },
+    {
+      "id": "NIT004",
+      "name": "Sneha Singh",
+      "email": "sneha.singh@nitsri.ac.in",
+      "department": "Mechanical Engineering",
+      "year": 1,
+      "section": "A",
+      "subjects": ["MATH101", "PHYS101", "ME101"]
+    }
+  ],
+  "faculty": [
+    {
+      "id": "NITFAC001",
+      "name": "Dr. Rajesh Kumar",
+      "email": "rajesh.kumar@nitsri.ac.in",
+      "department": "Computer Science & Engineering",
+      "subjects": ["Data Structures", "Programming"],
+      "maxHoursPerWeek": 20,
+      "preferredTimeSlots": ["09:00-10:00", "10:00-11:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC002",
+      "name": "Dr. Priya Sharma",
+      "email": "priya.sharma@nitsri.ac.in",
+      "department": "Electronics & Communication Engineering",
+      "subjects": ["Digital Electronics", "Basic Electronics"],
+      "maxHoursPerWeek": 18,
+      "preferredTimeSlots": ["09:00-10:00", "14:00-15:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC003",
+      "name": "Dr. Amit Patel",
+      "email": "amit.patel@nitsri.ac.in",
+      "department": "Mechanical Engineering",
+      "subjects": ["Thermodynamics", "Engineering Mechanics"],
+      "maxHoursPerWeek": 20,
+      "preferredTimeSlots": ["10:00-11:00", "11:00-12:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC004",
+      "name": "Dr. Sunita Reddy",
+      "email": "sunita.reddy@nitsri.ac.in",
+      "department": "Mathematics",
+      "subjects": ["Mathematics-I"],
+      "maxHoursPerWeek": 25,
+      "preferredTimeSlots": ["09:00-10:00", "10:00-11:00", "11:00-12:00"],
+      "unavailableTimeSlots": []
+    },
+    {
+      "id": "NITFAC005",
+      "name": "Dr. Vikram Singh",
+      "email": "vikram.singh@nitsri.ac.in",
+      "department": "Physics",
+      "subjects": ["Physics-I"],
+      "maxHoursPerWeek": 23,
+      "preferredTimeSlots": ["09:00-10:00", "15:00-16:00"],
+      "unavailableTimeSlots": []
+    }
+  ],
+  "classrooms": [
+    {
+      "id": "NITROOM001",
+      "name": "Main Lecture Hall 1",
+      "capacity": 60,
+      "type": "lecture",
+      "equipment": ["Projector", "Whiteboard", "Sound System"],
+      "location": "Main Building"
+    },
+    {
+      "id": "NITROOM002",
+      "name": "Computer Lab 1",
+      "capacity": 30,
+      "type": "computer",
+      "equipment": ["Computers", "Projector", "Network"],
+      "location": "Computer Center"
+    },
+    {
+      "id": "NITROOM003",
+      "name": "Electronics Lab",
+      "capacity": 25,
+      "type": "lab",
+      "equipment": ["Oscilloscopes", "Multimeters", "Breadboards"],
+      "location": "Engineering Block"
+    },
+    {
+      "id": "NITROOM004",
+      "name": "Mechanical Workshop",
+      "capacity": 20,
+      "type": "lab",
+      "equipment": ["Lathe Machines", "Safety Equipment"],
+      "location": "Workshop Block"
+    },
+    {
+      "id": "NITROOM005",
+      "name": "Tutorial Room 1",
+      "capacity": 25,
+      "type": "lecture",
+      "equipment": ["Whiteboard", "Projector"],
+      "location": "Main Building"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "MATH101",
+      "name": "Mathematics-I",
+      "code": "MATH101",
+      "credits": 4,
+      "hoursPerWeek": 4,
+      "type": "theory",
+      "department": "Mathematics",
+      "prerequisites": []
+    },
+    {
+      "id": "PHYS101",
+      "name": "Physics-I",
+      "code": "PHYS101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Physics",
+      "prerequisites": []
+    },
+    {
+      "id": "CS101",
+      "name": "Programming Fundamentals",
+      "code": "CS101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Computer Science & Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "EC101",
+      "name": "Basic Electronics",
+      "code": "EC101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Electronics & Communication Engineering",
+      "prerequisites": []
+    },
+    {
+      "id": "ME101",
+      "name": "Engineering Mechanics",
+      "code": "ME101",
+      "credits": 3,
+      "hoursPerWeek": 3,
+      "type": "theory",
+      "department": "Mechanical Engineering",
+      "prerequisites": []
+    }
+  ]
+}

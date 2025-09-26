@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Website - Timetable Integration Example</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .nav {
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+      }
+
+      .nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .nav a:hover {
+        background-color: #f0f0f0;
+      }
+
+      .content {
+        padding: 2rem 0;
+      }
+
+      .section {
+        background: white;
+        margin: 2rem 0;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .widget-container {
+        margin: 1rem 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .code-block {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1rem 0;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        overflow-x: auto;
+      }
+
+      .btn {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background: #5a6fd8;
+      }
+
+      .footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div class="container">
+        <h1>🏛️ NIT Srinagar</h1>
+        <p>National Institute of Technology, Srinagar</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#timetable">Timetable</a></li>
+          <li><a href="#faculty">Faculty</a></li>
+          <li><a href="#students">Students</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+      <div class="container">
+        <!-- Welcome Section -->
+        <div class="section">
+          <h2>Welcome to NIT Srinagar</h2>
+          <p>
+            We are proud to showcase our integrated timetable system powered by
+            Kalpana - the nationwide AI timetable platform. This demonstrates
+            how any college can seamlessly integrate advanced scheduling
+            capabilities into their existing website.
+          </p>
+        </div>
+
+        <!-- Timetable Section -->
+        <div class="section">
+          <h2>📅 College Timetable</h2>
+          <p>
+            View the current semester timetable for all departments. The
+            timetable is automatically generated using AI algorithms to ensure
+            optimal scheduling with minimal conflicts.
+          </p>
+
+          <!-- Timetable Widget Container -->
+          <div class="widget-container">
+            <div id="timetable-container"></div>
+          </div>
+        </div>
+
+        <!-- Faculty Section -->
+        <div class="section">
+          <h2>👨‍🏫 Faculty Schedules</h2>
+          <p>
+            Faculty members can view their personal schedules and manage their
+            availability. Students can also check faculty office hours and
+            contact information.
+          </p>
+
+          <!-- Faculty Widget Container -->
+          <div class="widget-container">
+            <div id="faculty-container"></div>
+          </div>
+        </div>
+
+        <!-- Student Section -->
+        <div class="section">
+          <h2>👨‍🎓 Student Portal</h2>
+          <p>
+            Students can access their personal timetables, assignment schedules,
+            and exam timetables. Login to view your personalized schedule.
+          </p>
+
+          <!-- Student Widget Container -->
+          <div class="widget-container">
+            <div id="student-container"></div>
+          </div>
+        </div>
+
+        <!-- Integration Code Example -->
+        <div class="section">
+          <h2>💻 Integration Code</h2>
+          <p>Here's how this integration was implemented on our website:</p>
+
+          <h3>1. Include the SDK</h3>
+          <div class="code-block">
+            &lt;script
+            src="https://app.kalpana-timetable.com/kalpana-sdk.js"&gt;&lt;/script&gt;
+          </div>
+
+          <h3>2. Initialize the SDK</h3>
+          <div class="code-block">
+            &lt;script&gt; // Initialize Kalpana SDK const kalpana = new
+            KalpanaSDK({ apiBaseUrl: 'https://api.kalpana-timetable.com',
+            frontendUrl: 'https://app.kalpana-timetable.com', theme: 'light',
+            primaryColor: '#667eea', secondaryColor: '#764ba2', language: 'en',
+            debug: true }); // Initialize with college ID
+            kalpana.init('nit-srinagar-001').then(result => { if
+            (result.success) { console.log('Kalpana SDK initialized
+            successfully'); // Create timetable widget
+            kalpana.createTimetableWidget('timetable-container', { height:
+            '600px', showControls: true, allowFullscreen: true }); // Create
+            faculty widget kalpana.createFacultyWidget('faculty-container',
+            'faculty-123', { height: '400px', showPersonalInfo: true }); //
+            Create student login widget
+            kalpana.createLoginWidget('student-container', { height: '500px',
+            showRegistration: true, allowGoogleLogin: true }); } else {
+            console.error('Failed to initialize SDK:', result.error); } });
+            &lt;/script&gt;
+          </div>
+
+          <h3>3. Alternative: HTML Data Attributes</h3>
+          <div class="code-block">
+            &lt;!-- Timetable Widget --&gt; &lt;div id="timetable-widget"
+            data-kalpana-widget="timetable" data-college-id="nit-srinagar-001"
+            data-options='{"height": "600px", "showControls": true}'
+            &gt;&lt;/div&gt; &lt;!-- Faculty Widget --&gt; &lt;div
+            id="faculty-widget" data-kalpana-widget="faculty"
+            data-college-id="nit-srinagar-001" data-faculty-id="faculty-123"
+            data-options='{"height": "400px"}' &gt;&lt;/div&gt;
+          </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="section">
+          <h2>✨ Key Features</h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 1rem;
+            "
+          >
+            <div>
+              <h3>🤖 AI-Powered Generation</h3>
+              <p>
+                Advanced genetic algorithms automatically generate conflict-free
+                timetables in seconds, optimizing for faculty preferences and
+                resource availability.
+              </p>
+            </div>
+            <div>
+              <h3>📱 Responsive Design</h3>
+              <p>
+                Works perfectly on desktop, tablet, and mobile devices. The
+                widgets automatically adapt to your website's design and screen
+                size.
+              </p>
+            </div>
+            <div>
+              <h3>🔒 Secure & Isolated</h3>
+              <p>
+                Complete data isolation between colleges. Each institution's
+                data is completely separate and secure.
+              </p>
+            </div>
+            <div>
+              <h3>🎨 Customizable</h3>
+              <p>
+                Match your college's branding with custom colors, themes, and
+                styling options.
+              </p>
+            </div>
+            <div>
+              <h3>🌐 Multi-Language</h3>
+              <p>
+                Support for Hindi, English, Tamil, Telugu, Bengali, and other
+                Indian languages.
+              </p>
+            </div>
+            <div>
+              <h3>📊 Analytics</h3>
+              <p>
+                Comprehensive analytics and reporting to help optimize your
+                scheduling and resource utilization.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div
+          class="section"
+          style="
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+          "
+        >
+          <h2>Ready to Integrate?</h2>
+          <p>
+            Join hundreds of colleges across India using Kalpana for their
+            timetable management needs.
+          </p>
+          <button
+            class="btn"
+            onclick="window.open('https://app.kalpana-timetable.com/register', '_blank')"
+          >
+            Get Started Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          &copy; 2024 NIT Srinagar. Powered by
+          <strong>Kalpana Timetable Platform</strong>.
+        </p>
+        <p>
+          This is a demonstration of how Kalpana can be integrated into any
+          college website.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Include Kalpana SDK -->
+    <script src="kalpana-sdk.js"></script>
+
+    <!-- Initialize Kalpana -->
+    <script>
+      // Initialize Kalpana SDK
+      const kalpana = new KalpanaSDK({
+        apiBaseUrl: "http://localhost:3001", // Use local API for demo
+        frontendUrl: "http://localhost:5173", // Use local frontend for demo
+        theme: "light",
+        primaryColor: "#667eea",
+        secondaryColor: "#764ba2",
+        language: "en",
+        debug: true,
+      });
+
+      // Initialize with demo college ID
+      kalpana
+        .init("nit-srinagar-001")
+        .then((result) => {
+          if (result.success) {
+            console.log("✅ Kalpana SDK initialized successfully");
+
+            // Create timetable widget
+            const timetableWidget = kalpana.createTimetableWidget(
+              "timetable-container",
+              {
+                height: "600px",
+                showControls: true,
+                allowFullscreen: true,
+                showFilters: true,
+              }
+            );
+            console.log("📅 Timetable widget created:", timetableWidget);
+
+            // Create faculty widget
+            const facultyWidget = kalpana.createFacultyWidget(
+              "faculty-container",
+              "faculty-123",
+              {
+                height: "400px",
+                showPersonalInfo: true,
+                showOfficeHours: true,
+              }
+            );
+            console.log("👨‍🏫 Faculty widget created:", facultyWidget);
+
+            // Create student login widget
+            const loginWidget = kalpana.createLoginWidget("student-container", {
+              height: "500px",
+              showRegistration: true,
+              allowGoogleLogin: true,
+            });
+            console.log("👨‍🎓 Login widget created:", loginWidget);
+          } else {
+            console.error("❌ Failed to initialize SDK:", result.error);
+
+            // Show fallback content if SDK fails to load
+            document.getElementById("timetable-container").innerHTML = `
+                    <div style="padding: 2rem; text-align: center; background: #f8f9fa; border: 2px dashed #dee2e6;">
+                        <h3>🚧 Timetable Widget</h3>
+                        <p>This would display the integrated timetable widget.</p>
+                        <p><em>SDK initialization failed in demo mode.</em></p>
+                    </div>
+                `;
+
+            document.getElementById("faculty-container").innerHTML = `
+                    <div style="padding: 2rem; text-align: center; background: #f8f9fa; border: 2px dashed #dee2e6;">
+                        <h3>👨‍🏫 Faculty Schedule Widget</h3>
+                        <p>This would display faculty schedules and information.</p>
+                        <p><em>SDK initialization failed in demo mode.</em></p>
+                    </div>
+                `;
+
+            document.getElementById("student-container").innerHTML = `
+                    <div style="padding: 2rem; text-align: center; background: #f8f9fa; border: 2px dashed #dee2e6;">
+                        <h3>👨‍🎓 Student Login Widget</h3>
+                        <p>This would display the student login and portal interface.</p>
+                        <p><em>SDK initialization failed in demo mode.</em></p>
+                    </div>
+                `;
+          }
+        })
+        .catch((error) => {
+          console.error("❌ SDK initialization error:", error);
+        });
+
+      // Add some interactive features
+      document.addEventListener("DOMContentLoaded", function () {
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
