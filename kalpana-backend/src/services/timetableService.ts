@@ -3,12 +3,19 @@ import {
   Timetable, 
   ScheduledClass, 
   Subject, 
-  Faculty, 
+  Faculty as DbFaculty, 
   Classroom, 
   TimeSlot,
   ApiResponse,
   PaginatedResponse 
 } from '../database/schema';
+import { 
+  Faculty, 
+  Subject as EngineSubject, 
+  Classroom as EngineClassroom, 
+  TimeSlot as EngineTimeSlot,
+  TimetableInput 
+} from '../types';
 import { generateTimetable } from '../engine';
 
 export class TimetableService {
@@ -97,11 +104,38 @@ export class TimetableService {
       }
 
       // Convert to the format expected by the engine
-      const timetableInput = {
-        subjects: subjects.data || [],
-        faculty: faculty.data || [],
-        classrooms: classrooms.data || [],
-        timeSlots: timeSlots.data || []
+      // Transform database objects to engine-compatible types
+      const transformedSubjects: EngineSubject[] = (subjects.data || []).map(subject => ({
+        id: subject.id,
+        name: subject.name,
+        hoursPerWeek: subject.hoursPerWeek
+      }));
+
+      const transformedFaculty: Faculty[] = (faculty.data || []).map((fac: DbFaculty) => ({
+        id: fac.id,
+        name: `${fac.employeeId}`, // Use employeeId as name since database Faculty doesn't have name
+        canTeach: fac.canTeach
+      }));
+
+      const transformedClassrooms: EngineClassroom[] = (classrooms.data || []).map(classroom => ({
+        id: classroom.id,
+        name: classroom.name,
+        capacity: classroom.capacity,
+        type: classroom.type === 'Lecture Hall' || classroom.type === 'Lab' ? classroom.type : 'Lecture Hall'
+      }));
+
+      const transformedTimeSlots: EngineTimeSlot[] = (timeSlots.data || []).map(slot => ({
+        id: slot.id,
+        day: slot.day === 'Sunday' ? 'Saturday' : slot.day, // Map Sunday to Saturday if needed
+        startTime: slot.startTime,
+        endTime: slot.endTime
+      }));
+
+      const timetableInput: TimetableInput = {
+        subjects: transformedSubjects,
+        faculty: transformedFaculty,
+        classrooms: transformedClassrooms,
+        timeSlots: transformedTimeSlots
       };
 
       // Generate timetable using the existing engine
@@ -210,7 +244,7 @@ export class TimetableService {
         return {
           id: sc.id,
           subject: subject?.name || 'Unknown Subject',
-          faculty: facultyMember?.userId || 'Unknown Faculty',
+          faculty: facultyMember?.employeeId || 'Unknown Faculty',
           classroom: classroom?.name || 'Unknown Classroom',
           day: timeSlot?.day || 'Unknown Day',
           time: timeSlot ? `${timeSlot.startTime} - ${timeSlot.endTime}` : 'Unknown Time'
@@ -284,10 +318,10 @@ export class TimetableService {
     }
   }
 
-  private static async getCollegeFaculty(collegeId: string): Promise<ApiResponse<Faculty[]>> {
+  private static async getCollegeFaculty(collegeId: string): Promise<ApiResponse<DbFaculty[]>> {
     try {
       // TODO: Fetch from database
-      const faculty: Faculty[] = [
+      const faculty: DbFaculty[] = [
         {
           id: 'fac_001',
           collegeId: collegeId,

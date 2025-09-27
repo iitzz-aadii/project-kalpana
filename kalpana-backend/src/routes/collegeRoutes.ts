@@ -1,16 +1,28 @@
 // College-specific API routes for multi-tenant system
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { CollegeService } from '../database/collegeService';
 import { TimetableService } from '../services/timetableService';
-import { AuthMiddleware } from '../middleware/auth';
+import { AuthMiddleware, AuthenticatedRequest } from '../middleware/auth';
 
 const router = express.Router();
 
+// Extend Request interface to include collegeId
+interface RequestWithCollege extends Request {
+  collegeId?: string;
+  user?: any;
+}
+
 // Middleware to extract college context
-const extractCollegeContext = async (req: any, res: any, next: any) => {
+const extractCollegeContext = async (req: RequestWithCollege, res: Response, next: NextFunction) => {
   try {
     // Extract college ID from various sources
-    let collegeId = req.headers['x-college-id'] || req.query.collegeId;
+    let collegeId: string | undefined = req.headers['x-college-id'] as string;
+    if (!collegeId && req.query.collegeId) {
+      const queryCollegeId = Array.isArray(req.query.collegeId) ? req.query.collegeId[0] : req.query.collegeId;
+      if (typeof queryCollegeId === 'string') {
+        collegeId = queryCollegeId;
+      }
+    }
     
     // If not provided, try to get from user's college
     if (!collegeId && req.user) {
@@ -20,9 +32,11 @@ const extractCollegeContext = async (req: any, res: any, next: any) => {
     // If still not found, try to get from domain
     if (!collegeId) {
       const host = req.get('host');
-      const collegeResponse = await CollegeService.getCollegeByDomain(host);
-      if (collegeResponse.success && collegeResponse.data) {
-        collegeId = collegeResponse.data.id;
+      if (host) {
+        const collegeResponse = await CollegeService.getCollegeByDomain(host);
+        if (collegeResponse.success && collegeResponse.data) {
+          collegeId = collegeResponse.data.id;
+        }
       }
     }
     
@@ -44,8 +58,14 @@ const extractCollegeContext = async (req: any, res: any, next: any) => {
 };
 
 // College Information Routes
-router.get('/info', extractCollegeContext, async (req: any, res: any) => {
+router.get('/info', extractCollegeContext, async (req: RequestWithCollege, res: Response) => {
   try {
+    if (!req.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
     const collegeResponse = await CollegeService.getCollege(req.collegeId);
     res.json(collegeResponse);
   } catch (error) {
@@ -56,10 +76,17 @@ router.get('/info', extractCollegeContext, async (req: any, res: any) => {
   }
 });
 
-router.get('/stats', extractCollegeContext, AuthMiddleware.authenticate, async (req: any, res: any) => {
+router.get('/stats', extractCollegeContext, AuthMiddleware.authenticate, async (req: Request, res: Response) => {
   try {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
     // Check if user has access to this college
-    const hasAccess = await CollegeService.validateCollegeAccess(req.user.id, req.collegeId);
+    const hasAccess = await CollegeService.validateCollegeAccess(authReq.user.id, authReq.collegeId);
     if (!hasAccess) {
       return res.status(403).json({
         success: false,
@@ -67,7 +94,7 @@ router.get('/stats', extractCollegeContext, AuthMiddleware.authenticate, async (
       });
     }
     
-    const statsResponse = await CollegeService.getCollegeStats(req.collegeId);
+    const statsResponse = await CollegeService.getCollegeStats(authReq.collegeId);
     res.json(statsResponse);
   } catch (error) {
     res.status(500).json({
@@ -78,9 +105,16 @@ router.get('/stats', extractCollegeContext, AuthMiddleware.authenticate, async (
 });
 
 // College Settings Routes
-router.get('/settings', extractCollegeContext, AuthMiddleware.authenticate, async (req: any, res: any) => {
+router.get('/settings', extractCollegeContext, AuthMiddleware.authenticate, async (req: Request, res: Response) => {
   try {
-    const collegeResponse = await CollegeService.getCollege(req.collegeId);
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
+    const collegeResponse = await CollegeService.getCollege(authReq.collegeId);
     if (!collegeResponse.success || !collegeResponse.data) {
       return res.status(404).json({
         success: false,
@@ -100,17 +134,24 @@ router.get('/settings', extractCollegeContext, AuthMiddleware.authenticate, asyn
   }
 });
 
-router.put('/settings', extractCollegeContext, AuthMiddleware.authenticate, async (req: any, res: any) => {
+router.put('/settings', extractCollegeContext, AuthMiddleware.authenticate, async (req: Request, res: Response) => {
   try {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
     // Only college admins can update settings
-    if (req.user.role !== 'college_admin' && req.user.role !== 'super_admin') {
+    if (authReq.user.role !== 'college_admin' && authReq.user.role !== 'super_admin') {
       return res.status(403).json({
         success: false,
         error: 'Insufficient permissions'
       });
     }
     
-    const updateResponse = await CollegeService.updateCollege(req.collegeId, {
+    const updateResponse = await CollegeService.updateCollege(authReq.collegeId, {
       settings: req.body
     });
     
@@ -124,7 +165,7 @@ router.put('/settings', extractCollegeContext, AuthMiddleware.authenticate, asyn
 });
 
 // College Registration Route (Public)
-router.post('/register', async (req: any, res: any) => {
+router.post('/register', async (req: Request, res: Response) => {
   try {
     const { name, domain, contactEmail, contactPhone, address } = req.body;
     
@@ -175,9 +216,16 @@ router.post('/register', async (req: any, res: any) => {
 });
 
 // College-specific Timetable Routes
-router.get('/timetables', extractCollegeContext, AuthMiddleware.authenticate, async (req: any, res: any) => {
+router.get('/timetables', extractCollegeContext, AuthMiddleware.authenticate, async (req: Request, res: Response) => {
   try {
-    const timetablesResponse = await TimetableService.getCollegeTimetables(req.collegeId);
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
+    const timetablesResponse = await TimetableService.getCollegeTimetables(authReq.collegeId);
     res.json(timetablesResponse);
   } catch (error) {
     res.status(500).json({
@@ -187,10 +235,17 @@ router.get('/timetables', extractCollegeContext, AuthMiddleware.authenticate, as
   }
 });
 
-router.post('/timetables/generate', extractCollegeContext, AuthMiddleware.authenticate, async (req: any, res: any) => {
+router.post('/timetables/generate', extractCollegeContext, AuthMiddleware.authenticate, async (req: Request, res: Response) => {
   try {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
     // Only admins can generate timetables
-    if (req.user.role !== 'college_admin' && req.user.role !== 'super_admin') {
+    if (authReq.user.role !== 'college_admin' && authReq.user.role !== 'super_admin') {
       return res.status(403).json({
         success: false,
         error: 'Only college admins can generate timetables'
@@ -198,9 +253,9 @@ router.post('/timetables/generate', extractCollegeContext, AuthMiddleware.authen
     }
     
     const timetableResponse = await TimetableService.generateTimetable(
-      req.collegeId,
+      authReq.collegeId,
       req.body,
-      req.user.id
+      authReq.user.id
     );
     
     res.json(timetableResponse);
@@ -213,17 +268,24 @@ router.post('/timetables/generate', extractCollegeContext, AuthMiddleware.authen
 });
 
 // College Integration Routes
-router.get('/integration/config', extractCollegeContext, AuthMiddleware.authenticate, async (req: any, res: any) => {
+router.get('/integration/config', extractCollegeContext, AuthMiddleware.authenticate, async (req: Request, res: Response) => {
   try {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
     // Only college admins can access integration config
-    if (req.user.role !== 'college_admin' && req.user.role !== 'super_admin') {
+    if (authReq.user.role !== 'college_admin' && authReq.user.role !== 'super_admin') {
       return res.status(403).json({
         success: false,
         error: 'Insufficient permissions'
       });
     }
     
-    const collegeResponse = await CollegeService.getCollege(req.collegeId);
+    const collegeResponse = await CollegeService.getCollege(authReq.collegeId);
     if (!collegeResponse.success || !collegeResponse.data) {
       return res.status(404).json({
         success: false,
@@ -233,10 +295,10 @@ router.get('/integration/config', extractCollegeContext, AuthMiddleware.authenti
     
     // Generate integration configuration
     const integrationConfig = {
-      collegeId: req.collegeId,
-      apiKey: `tk_${req.collegeId}_${Date.now()}`, // TODO: Generate proper API key
-      embedUrl: `${process.env.FRONTEND_URL}/embed/${req.collegeId}`,
-      apiBaseUrl: `${process.env.API_BASE_URL}/api/colleges/${req.collegeId}`,
+      collegeId: authReq.collegeId,
+      apiKey: `tk_${authReq.collegeId}_${Date.now()}`, // TODO: Generate proper API key
+      embedUrl: `${process.env.FRONTEND_URL}/embed/${authReq.collegeId}`,
+      apiBaseUrl: `${process.env.API_BASE_URL}/api/colleges/${authReq.collegeId}`,
       customization: {
         primaryColor: collegeResponse.data.primaryColor || '#6366f1',
         secondaryColor: collegeResponse.data.secondaryColor || '#8b5cf6',
@@ -257,8 +319,14 @@ router.get('/integration/config', extractCollegeContext, AuthMiddleware.authenti
 });
 
 // Public embed route (no authentication required)
-router.get('/embed', extractCollegeContext, async (req: any, res: any) => {
+router.get('/embed', extractCollegeContext, async (req: RequestWithCollege, res: Response) => {
   try {
+    if (!req.collegeId) {
+      return res.status(400).json({
+        success: false,
+        error: 'College ID not found'
+      });
+    }
     const collegeResponse = await CollegeService.getCollege(req.collegeId);
     if (!collegeResponse.success || !collegeResponse.data) {
       return res.status(404).json({

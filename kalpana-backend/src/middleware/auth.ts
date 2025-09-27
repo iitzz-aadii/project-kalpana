@@ -17,7 +17,7 @@ export interface AuthenticatedRequest extends Request {
 
 export class AuthMiddleware {
   // Authenticate user and extract user information
-  static authenticate = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  static authenticate = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const authHeader = req.headers.authorization;
       
@@ -43,7 +43,7 @@ export class AuthMiddleware {
         lastName: 'User'
       };
       
-      req.user = mockUser;
+      (req as AuthenticatedRequest).user = mockUser;
       next();
     } catch (error) {
       res.status(401).json({
@@ -55,15 +55,16 @@ export class AuthMiddleware {
 
   // Check if user has specific role
   static requireRole = (roles: string[]) => {
-    return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-      if (!req.user) {
+    return (req: Request, res: Response, next: NextFunction) => {
+      const authReq = req as AuthenticatedRequest;
+      if (!authReq.user) {
         return res.status(401).json({
           success: false,
           error: 'Authentication required'
         });
       }
       
-      if (!roles.includes(req.user.role)) {
+      if (!roles.includes(authReq.user.role)) {
         return res.status(403).json({
           success: false,
           error: 'Insufficient permissions'
@@ -75,15 +76,16 @@ export class AuthMiddleware {
   };
 
   // Check if user is college admin or super admin
-  static requireAdmin = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
+  static requireAdmin = (req: Request, res: Response, next: NextFunction) => {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.user) {
       return res.status(401).json({
         success: false,
         error: 'Authentication required'
       });
     }
     
-    if (req.user.role !== 'college_admin' && req.user.role !== 'super_admin') {
+    if (authReq.user.role !== 'college_admin' && authReq.user.role !== 'super_admin') {
       return res.status(403).json({
         success: false,
         error: 'Admin access required'
@@ -94,15 +96,16 @@ export class AuthMiddleware {
   };
 
   // Check if user is super admin
-  static requireSuperAdmin = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
+  static requireSuperAdmin = (req: Request, res: Response, next: NextFunction) => {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.user) {
       return res.status(401).json({
         success: false,
         error: 'Authentication required'
       });
     }
     
-    if (req.user.role !== 'super_admin') {
+    if (authReq.user.role !== 'super_admin') {
       return res.status(403).json({
         success: false,
         error: 'Super admin access required'
@@ -113,22 +116,23 @@ export class AuthMiddleware {
   };
 
   // Check if user belongs to the same college
-  static requireSameCollege = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
+  static requireSameCollege = (req: Request, res: Response, next: NextFunction) => {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.user) {
       return res.status(401).json({
         success: false,
         error: 'Authentication required'
       });
     }
     
-    if (!req.collegeId) {
+    if (!authReq.collegeId) {
       return res.status(400).json({
         success: false,
         error: 'College context not found'
       });
     }
     
-    if (req.user.collegeId !== req.collegeId && req.user.role !== 'super_admin') {
+    if (authReq.user.collegeId !== authReq.collegeId && authReq.user.role !== 'super_admin') {
       return res.status(403).json({
         success: false,
         error: 'Access denied to this college'
@@ -139,7 +143,7 @@ export class AuthMiddleware {
   };
 
   // Optional authentication - doesn't fail if no token
-  static optionalAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  static optionalAuth = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const authHeader = req.headers.authorization;
       
@@ -159,7 +163,7 @@ export class AuthMiddleware {
           lastName: 'User'
         };
         
-        req.user = mockUser;
+        (req as AuthenticatedRequest).user = mockUser;
       }
       
       next();
